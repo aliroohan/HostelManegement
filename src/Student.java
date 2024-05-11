@@ -65,6 +65,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student ID: " + getStudentID() + "\nName: " + getName() + "\nAge: " + getAge() + "\nGender: " + getGender() + "\nContact Number: " + getContactNumber() + "\nRoom Number: " + getRoomNumber();
+        return getStudentID() + "," + getName() + "," + getAge() + "," + getGender() + "," + getContactNumber() + "," + getRoomNumber();
     }
 }
