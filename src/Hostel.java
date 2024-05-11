@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hostel {
     private String hostelId;
     private String name;
     private String address;
-    private List<Room> rooms;
+    private ArrayList<Room> rooms;
 
     public String getHostelId() {
         return hostelId;
@@ -34,14 +35,14 @@ public class Hostel {
         return rooms;
     }
 
-    public void setRooms(List<Room> rooms) {
+    public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
     }
 
-    public Hostel(String hostelId, String name, String address, List<Room> rooms) {
+    public Hostel(String hostelId, String name, String address) {
         setHostelId(hostelId);
         setName(name);
         setAddress(address);
-        setRooms(rooms);
+        this.rooms = new ArrayList<Room>();
     }
 }
