@@ -9,10 +9,94 @@ public class HostelManager {
         return hostels;
     }
 
-    public void setHostels(ArrayList<Hostel> hostels) {
-        this.hostels = hostels;
+    public void addHostel(Hostel hostel) {
+        // Add hostel
+        hostels.add(hostel);
+        try {
+            File file = new File(hostel.getName() + ".txt");
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
+    public void removeHostel(Hostel hostel) {
+        // Remove hostel
+        hostels.remove(hostel);
+        File file = new File(hostel.getName() + ".txt");
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
+    }
+
+    public Hostel searchHostel(String hostelId) {
+        // Search for hostel
+        for (Hostel hostel : hostels) {
+            if (hostel.getHostelId().equals(hostelId)) {
+                return hostel;
+            }
+        }
+        return null;
+    }
+
+    public void editHostelDetails(Hostel hostel) {
+        // Edit hostel details
+        System.out.println("What do you want to update?");
+        System.out.println("1. Name");
+        System.out.println("2. Address");
+        Scanner input = new Scanner(System.in);
+        int choice = input.nextInt();
+        switch (choice) {
+            case 1:
+                System.out.println("Enter new name: ");
+                hostel.setName(input.nextLine());
+                break;
+            case 2:
+                System.out.println("Enter new address: ");
+                hostel.setAddress(input.nextLine());
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+    }
+
+    public void addRoom(Room room, Hostel hostel) {
+        // Add room to hostel
+        hostel.getRooms().add(room);
+    }
+
+    public void removeRoom(Room room, Hostel hostel) {
+        // Remove room from hostel
+        hostel.getRooms().remove(room);
+    }
+
+    public Hostel searchHostelByName(String id) {
+        // Search for hostel by name
+        for (Hostel hostel : hostels) {
+            if (hostel.getHostelId().equals(id)) {
+                return hostel;
+            }
+        }
+        return null;
+    }
+
+    public void displayHostels() {
+        // Display all hostels
+        for (Hostel hostel : hostels) {
+            System.out.println("Hostel ID: " + hostel.getHostelId());
+            System.out.println("Name: " + hostel.getName());
+            System.out.println("Address: " + hostel.getAddress());
+            System.out.println();
+        }
+    }
     // Methods to manage hostels, rooms, and students
     public void addStudent(Student student, Hostel hostel) {
         // Add student to hostel
@@ -251,6 +335,4 @@ public class HostelManager {
         }
 
     }
-
-    // Other methods for hostel management
 }
