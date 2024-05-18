@@ -1,3 +1,5 @@
+package com.ali.HostelManagement;
+
 public class Student {
     private String studentID;
     private String name;

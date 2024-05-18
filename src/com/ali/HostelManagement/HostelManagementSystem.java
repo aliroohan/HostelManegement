@@ -1,4 +1,5 @@
-import java.io.File;
+package com.ali.HostelManagement;
+
 import java.util.Scanner;
 
 public class HostelManagementSystem {
@@ -11,14 +12,12 @@ public class HostelManagementSystem {
             System.out.println("1. Add a hostel");
             System.out.println("2. Remove a hostel");
             System.out.println("3. Display all hostels");
-            System.out.println("4. Add a room to a hostel");
-            System.out.println("5. Remove a room from a hostel");
-            System.out.println("6. Search for a hostel");
-            System.out.println("7. Edit hostel details");
-            System.out.println("8. Add a student");
-            System.out.println("9. Remove a student");
-            System.out.println("10. Edit student details");
-            System.out.println("11. Exit");
+            System.out.println("4. Search for a hostel");
+            System.out.println("5. Edit hostel details");
+            System.out.println("6. Add a student");
+            System.out.println("7. Remove a student");
+            System.out.println("8. Edit student details");
+            System.out.println("9. Exit");
 
             int option = scanner.nextInt();
             scanner.nextLine();  // Consume newline left-over
@@ -75,18 +74,11 @@ public class HostelManagementSystem {
                     // You need to ask for the student details here
                     break;
                 case 9:
-                    // Remove a student
-                    // You need to ask for the studentId here
-                    break;
-                case 10:
-                    // Edit student details
-                    // You need to ask for the studentId and new details here
-                    break;
-                case 11:
                     System.out.println("Exiting...");
                     System.exit(0);
+                    break;
                 default:
-                    System.out.println("Invalid option. Please enter a number between 1 and 11.");
+                    System.out.println("Invalid option. Please enter a number between 1 and 9.");
             }
         }
     }

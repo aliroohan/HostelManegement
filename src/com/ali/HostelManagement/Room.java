@@ -1,3 +1,5 @@
+package com.ali.HostelManagement;
+
 import java.util.ArrayList;
 
 public class Room {

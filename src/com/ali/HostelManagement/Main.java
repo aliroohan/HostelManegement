@@ -1,3 +1,5 @@
+package com.ali.HostelManagement;
+
 import java.io.File;
 
 public class Main {
