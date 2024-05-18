@@ -7,7 +7,7 @@ public class Hostel {
     private String hostelId;
     private String name;
     private String address;
-    private ArrayList<Room> rooms;
+    private ArrayList<Student> students;
 
     public String getHostelId() {
         return hostelId;
@@ -33,18 +33,18 @@ public class Hostel {
         this.address = address;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
-    public void setRooms(ArrayList<Room> rooms) {
-        this.rooms = rooms;
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
     }
 
     public Hostel(String hostelId, String name, String address) {
         setHostelId(hostelId);
         setName(name);
         setAddress(address);
-        this.rooms = new ArrayList<Room>();
+        this.students = new ArrayList<Student>();
     }
 }

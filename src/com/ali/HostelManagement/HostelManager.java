@@ -27,11 +27,62 @@ public class HostelManager {
                 throw new RuntimeException(e);
             }
         }
+        for (Hostel hostel : hostels) {
+            File file = new File(hostel.getName() + ".txt");
+            if (file.exists()) {
+                try {
+                    Scanner scanner = new Scanner(file);
+                    while (scanner.hasNextLine()) {
+                        String[] studentInfo = scanner.nextLine().split(",");
+                        Student student = new Student(studentInfo[0], studentInfo[1], Integer.parseInt(studentInfo[2]), studentInfo[3], studentInfo[4], Integer.parseInt(studentInfo[5]));
+                        hostel.getStudents().add(student);
+                    }
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    public void updateHostels() {
+        // Update hostels
+        File hostelDirectory = new File("Hostel.txt");
+        FileWriter writer = null;
+        BufferedWriter bufferedWriter = null;
+        if (hostelDirectory.exists()) {
+            try {
+                writer = new FileWriter("Hostel.txt");
+                bufferedWriter = new BufferedWriter(writer);
+                for (Hostel hostel : hostels) {
+                    bufferedWriter.write(hostel.getHostelId() + "," + hostel.getName() + "," + hostel.getAddress());
+                    bufferedWriter.newLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                try {
+                    if (bufferedWriter != null) {
+                        bufferedWriter.close();
+                    }
+                    if (writer != null) {
+                        writer.close();
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
 
     public void addHostel(Hostel hostel) {
         // Add hostel
+        for (Hostel h : hostels) {
+            if (h.getHostelId().equals(hostel.getHostelId())) {
+                System.out.println("Hostel with similar ID already exists.\nTry Different ID");
+                return;
+            }
+        }
         hostels.add(hostel);
         try {
             FileWriter writer = new FileWriter("Hostel.txt", true);
@@ -80,6 +131,7 @@ public class HostelManager {
             FileWriter writer = new FileWriter("Hostel.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(tempHostels.getFirst().getHostelId() + "," + tempHostels.getFirst().getName() + "," + tempHostels.getFirst().getAddress());
+            bufferedWriter.newLine();
             tempHostels.remove(0);
             bufferedWriter.close();
             writer.close();
@@ -121,6 +173,7 @@ public class HostelManager {
         System.out.println("2. Address");
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
+        input.nextLine();
         switch (choice) {
             case 1:
                 System.out.println("Enter new name: ");
@@ -134,16 +187,7 @@ public class HostelManager {
                 System.out.println("Invalid choice.");
                 break;
         }
-    }
-
-    public void addRoom(Room room, Hostel hostel) {
-        // Add room to hostel
-        hostel.getRooms().add(room);
-    }
-
-    public void removeRoom(Room room, Hostel hostel) {
-        // Remove room from hostel
-        hostel.getRooms().remove(room);
+        this.updateHostels();
     }
 
     public Hostel searchHostelByName(String id) {
@@ -169,33 +213,16 @@ public class HostelManager {
     // Methods to manage hostels, rooms, and students
     public void addStudent(Student student, Hostel hostel) {
         // Add student to hostel
-        File file = new File(hostel.getName() + ".txt");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-                FileWriter writer = new FileWriter(hostel.getName() + ".txt", true);
-                BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                bufferedWriter.write(student.toString());
-                bufferedWriter.newLine();
-                bufferedWriter.close();
-                System.out.println("Successfully wrote to the file.");
-                writer.close();
-            } catch (Exception e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                FileWriter writer = new FileWriter(hostel.getName() + ".txt", true);
-                BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                bufferedWriter.write(student.toString());
-                bufferedWriter.newLine();
-                bufferedWriter.close();
-                System.out.println("Successfully wrote to the file.");
-                writer.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            FileWriter writer = new FileWriter(hostel.getName() + ".txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write(student.toString());
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+            System.out.println("Successfully wrote to the file.");
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

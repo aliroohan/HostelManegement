@@ -12,10 +12,10 @@ public class HostelManagementSystem {
             System.out.println("1. Add a hostel");
             System.out.println("2. Remove a hostel");
             System.out.println("3. Display all hostels");
-            System.out.println("4. Search for a hostel");
-            System.out.println("5. Edit hostel details");
-            System.out.println("6. Add a student");
-            System.out.println("7. Remove a student");
+            System.out.println("4. Edit hostel details");
+            System.out.println("5. Add a student");
+            System.out.println("6. Remove a student");
+            System.out.println("7. Search for a student");
             System.out.println("8. Edit student details");
             System.out.println("9. Exit");
 
@@ -50,16 +50,42 @@ public class HostelManagementSystem {
 
                     break;
                 case 3:
-//                    Display all hostels
+                    // Display all hostels
                     manager.displayHostels();
                     break;
                 case 4:
-                    // Add a room to a hostel
-                    // You need to ask for the room details and hostelId here
+                    // Edit hostel details
+                    // You need to ask for the hostelId and new details here
+                    System.out.print("Enter hostel ID: ");
+                    String hostelID = scanner.nextLine();
+                    manager.editHostelDetails(manager.searchHostel(hostelID));
                     break;
                 case 5:
-                    // Remove a room from a hostel
-                    // You need to ask for the room details and hostelId here
+                    // Add a student
+                    // You need to ask for the student details here
+                    System.out.print("Enter student ID: ");
+                    String studentID = scanner.nextLine();
+                    System.out.print("Enter student name: ");
+                    String studentName = scanner.nextLine();
+                    System.out.print("Enter student age: ");
+                    int studentAge = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline left-over
+                    System.out.print("Enter Gender: ");
+                    String studentGender = scanner.nextLine();
+                    System.out.print("Enter contact number: ");
+                    String studentContactNumber = scanner.nextLine();
+                    System.out.print("Enter room number: ");
+                    int studentRoomNumber = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline left-over
+
+                    System.out.println("Enter hostel ID: ");
+                    String id = scanner.nextLine();
+                    Hostel hostel1 = manager.searchHostel(id);
+                    if (hostel1 == null) {
+                        System.out.println("Hostel not found.");
+                        break;
+                    }
+                    manager.addStudent(new Student(studentID, studentName, studentAge, studentGender, studentContactNumber, studentRoomNumber), manager.searchHostel(id));
                     break;
                 case 6:
                     // Search for a hostel
