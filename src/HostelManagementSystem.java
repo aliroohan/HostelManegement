@@ -1,31 +1,70 @@
-import java.io.*;
 import java.util.Scanner;
 
 public class HostelManagementSystem {
     public static void main(String[] args) {
-        Student student1 = new Student("S001", "John", 19, "Male", "0123456789", 101);
-        Student student2 = new Student("S002", "Jane", 20, "Female", "9876543210", 102);
-        Student student3 = new Student("S003", "Doe", 19, "Male", "0123456789", 103);
-        HostelManager hostelManager = new HostelManager();
-        Hostel hostel1 = new Hostel("H001", "Hostel A", "123 Main Street");
-        Hostel hostel2 = new Hostel("H002", "Hostel B", "321 Main Street");
-        Room room1 = new Room(101, 4);
-        Room room2 = new Room(102, 4);
-        hostel1.getRooms().add(room1);
-        hostel2.getRooms().add(room2);
-        hostelManager.getHostels().add(hostel1);
-        hostelManager.getHostels().add(hostel2);
+        HostelManager manager = new HostelManager();
+        Scanner scanner = new Scanner(System.in);
 
+        while (true) {
+            System.out.println("Please choose an option:");
+            System.out.println("1. Add a hostel");
+            System.out.println("2. Remove a hostel");
+            System.out.println("3. Display all hostels");
+            System.out.println("4. Add a room to a hostel");
+            System.out.println("5. Remove a room from a hostel");
+            System.out.println("6. Search for a hostel");
+            System.out.println("7. Edit hostel details");
+            System.out.println("8. Add a student");
+            System.out.println("9. Remove a student");
+            System.out.println("10. Edit student details");
+            System.out.println("11. Exit");
 
-//        hostelManager.addStudent(student3, hostel2);
-//        hostelManager.editDetails(student1, hostel1);
-        hostelManager.editDetails(student3, hostel1);
-//        hostelManager.displayAllStudents();
-//        hostelManager.displayStudents(hostel1);
-        hostelManager.displayStudents(hostel2);
-//        hostelManager.searchStudent("S001", hostel1);
-//        hostelManager.searchStudent("S002", hostel1);
-//        hostelManager.removeStudent(student3, hostel2);
-//        hostelManager.searchStudent("S003", hostel1);
+            int option = scanner.nextInt();
+            scanner.nextLine();  // Consume newline left-over
+
+            switch (option) {
+                case 1:
+                    // Add a hostel
+                    // You need to ask for the details of the hostel here
+                    break;
+                case 2:
+                    // Remove a hostel
+                    // You need to ask for the hostelId here
+                    break;
+                case 3:
+                    // Add a room to a hostel
+                    // You need to ask for the room details and hostelId here
+                    break;
+                case 4:
+                    // Remove a room from a hostel
+                    // You need to ask for the room details and hostelId here
+                    break;
+                case 5:
+                    // Search for a hostel
+                    // You need to ask for the hostelId here
+                    break;
+                case 6:
+                    // Edit hostel details
+                    // You need to ask for the hostelId and new details here
+                    break;
+                case 7:
+                    // Add a student
+                    // You need to ask for the student details here
+                    break;
+                case 8:
+                    // Remove a student
+                    // You need to ask for the studentId here
+                    break;
+                case 9:
+                    // Edit student details
+                    // You need to ask for the studentId and new details here
+                    break;
+                case 10:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid option. Please enter a number between 1 and 10.");
+            }
+        }
     }
 }
