@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class HostelManagementSystem {
@@ -37,9 +38,9 @@ public class HostelManagementSystem {
                     // Remove a hostel
                     // You need to ask for the hostelId here
                     System.out.print("Enter hostel ID: ");
-                    hostelId = scanner.nextLine();
+                    String Id = scanner.nextLine();
                     Hostel hostel;
-                    hostel = manager.searchHostel(hostelId);
+                    hostel = manager.searchHostel(Id);
                     if (hostel == null) {
                         System.out.println("Hostel not found.");
                         break;

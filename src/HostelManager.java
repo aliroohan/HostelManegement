@@ -1,6 +1,10 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class HostelManager {
     private ArrayList<Hostel> hostels = new ArrayList<>();
@@ -8,9 +12,10 @@ public class HostelManager {
     public ArrayList<Hostel> getHostels() {
         return hostels;
     }
-    HostelManager() {
+
+    public HostelManager() {
         // Constructor
-        File hostelDirectory = new File("Hostels.txt");
+        File hostelDirectory = new File("Hostel.txt");
         if (hostelDirectory.exists()) {
             try {
                 Scanner scanner = new Scanner(hostelDirectory);
@@ -22,12 +27,6 @@ public class HostelManager {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-        } else{
-            try {
-                hostelDirectory.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
@@ -35,8 +34,8 @@ public class HostelManager {
     public void addHostel(Hostel hostel) {
         // Add hostel
         hostels.add(hostel);
-        try{
-            FileWriter writer = new FileWriter("Hostels.txt", true);
+        try {
+            FileWriter writer = new FileWriter("Hostel.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(hostel.getHostelId() + "," + hostel.getName() + "," + hostel.getAddress());
             bufferedWriter.newLine();
@@ -68,26 +67,31 @@ public class HostelManager {
             System.out.println("Failed to delete the file");
         }
         FileReader fileReader = null;
-        File tempFile = new File("temp.txt");
+        ArrayList<Hostel> tempHostels = new ArrayList<>();
         try {
-            tempFile.createNewFile();
-            fileReader = new FileReader("Hostels.txt");
+            fileReader = new FileReader("Hostel.txt");
             Scanner scanner = new Scanner(fileReader);
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
             while (scanner.hasNextLine()) {
                 String[] hostelInfo = scanner.nextLine().split(",");
                 if (!hostelInfo[0].equals(hostel.getHostelId())) {
-                    bufferedWriter.write(hostelInfo[0] + "," + hostelInfo[1] + "," + hostelInfo[2]);
-                    bufferedWriter.newLine();
+                    tempHostels.add(new Hostel(hostelInfo[0], hostelInfo[1], hostelInfo[2]));
                 }
             }
-            bufferedWriter.close();
             fileReader.close();
-            File hostelFile = new File("Hostels.txt");
-            hostelFile.delete();
-            if (!tempFile.renameTo(new File("Hostels.txt"))) {
-                throw new RuntimeException("Could not rename file");
+            FileWriter writer = new FileWriter("Hostel.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write(tempHostels.getFirst().getHostelId() + "," + tempHostels.getFirst().getName() + "," + tempHostels.getFirst().getAddress());
+            tempHostels.remove(0);
+            bufferedWriter.close();
+            writer.close();
+            writer = new FileWriter("Hostel.txt", true);
+            bufferedWriter = new BufferedWriter(writer);
+            for (Hostel tempHostel : tempHostels) {
+                bufferedWriter.write(tempHostel.getHostelId() + "," + tempHostel.getName() + "," + tempHostel.getAddress());
+                bufferedWriter.newLine();
             }
+            bufferedWriter.close();
+            writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -162,6 +166,7 @@ public class HostelManager {
             System.out.println();
         }
     }
+
     // Methods to manage hostels, rooms, and students
     public void addStudent(Student student, Hostel hostel) {
         // Add student to hostel
@@ -230,6 +235,7 @@ public class HostelManager {
             }
         }
     }
+
     public void displayStudents(Hostel hostel) {
         // Display all students in hostel
         FileReader fileReader = null;
