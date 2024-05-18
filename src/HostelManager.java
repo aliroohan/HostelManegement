@@ -8,10 +8,43 @@ public class HostelManager {
     public ArrayList<Hostel> getHostels() {
         return hostels;
     }
+    HostelManager() {
+        // Constructor
+        File hostelDirectory = new File("Hostels.txt");
+        if (hostelDirectory.exists()) {
+            try {
+                Scanner scanner = new Scanner(hostelDirectory);
+                while (scanner.hasNextLine()) {
+                    String[] hostelInfo = scanner.nextLine().split(",");
+                    Hostel hostel = new Hostel(hostelInfo[0], hostelInfo[1], hostelInfo[2]);
+                    hostels.add(hostel);
+                }
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else{
+            try {
+                hostelDirectory.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     public void addHostel(Hostel hostel) {
         // Add hostel
         hostels.add(hostel);
+        try{
+            FileWriter writer = new FileWriter("Hostels.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write(hostel.getHostelId() + "," + hostel.getName() + "," + hostel.getAddress());
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         try {
             File file = new File(hostel.getName() + ".txt");
             if (file.createNewFile()) {
@@ -33,6 +66,38 @@ public class HostelManager {
             System.out.println("File deleted successfully");
         } else {
             System.out.println("Failed to delete the file");
+        }
+        FileReader fileReader = null;
+        File tempFile = new File("temp.txt");
+        try {
+            tempFile.createNewFile();
+            fileReader = new FileReader("Hostels.txt");
+            Scanner scanner = new Scanner(fileReader);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
+            while (scanner.hasNextLine()) {
+                String[] hostelInfo = scanner.nextLine().split(",");
+                if (!hostelInfo[0].equals(hostel.getHostelId())) {
+                    bufferedWriter.write(hostelInfo[0] + "," + hostelInfo[1] + "," + hostelInfo[2]);
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.close();
+            fileReader.close();
+            File hostelFile = new File("Hostels.txt");
+            hostelFile.delete();
+            if (!tempFile.renameTo(new File("Hostels.txt"))) {
+                throw new RuntimeException("Could not rename file");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
