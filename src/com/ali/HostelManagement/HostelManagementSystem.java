@@ -17,7 +17,8 @@ public class HostelManagementSystem {
             System.out.println("6. Remove a student");
             System.out.println("7. Search for a student");
             System.out.println("8. Edit student details");
-            System.out.println("9. Exit");
+            System.out.println("9. Display all students of a hostel");
+            System.out.println("10. Exit");
 
             int option = scanner.nextInt();
             scanner.nextLine();  // Consume newline left-over
@@ -63,8 +64,11 @@ public class HostelManagementSystem {
                 case 5:
                     // Add a student
                     // You need to ask for the student details here
-                    System.out.print("Enter student ID: ");
-                    String studentID = scanner.nextLine();
+                    String studentID;
+                    do {
+                        System.out.print("Enter student ID: ");
+                        studentID = scanner.nextLine();
+                    } while (manager.checkDuplicateStudentID(studentID));
                     System.out.print("Enter student name: ");
                     String studentName = scanner.nextLine();
                     System.out.print("Enter student age: ");
@@ -100,6 +104,13 @@ public class HostelManagementSystem {
                     // You need to ask for the student details here
                     break;
                 case 9:
+                    // Display all students of a hostel
+                    // You need to ask for the hostelId here
+                    System.out.println("Enter hostel ID: ");
+                    String hostelID1 = scanner.nextLine();
+                    manager.displayStudents(manager.searchHostel(hostelID1));
+                    break;
+                case 10:
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;

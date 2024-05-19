@@ -168,36 +168,10 @@ public class HostelManager {
 
     public void editHostelDetails(Hostel hostel) {
         // Edit hostel details
-        System.out.println("What do you want to update?");
-        System.out.println("1. Name");
-        System.out.println("2. Address");
         Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        input.nextLine();
-        switch (choice) {
-            case 1:
-                System.out.println("Enter new name: ");
-                hostel.setName(input.nextLine());
-                break;
-            case 2:
-                System.out.println("Enter new address: ");
-                hostel.setAddress(input.nextLine());
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
-        }
+        System.out.println("Enter new address: ");
+        hostel.setAddress(input.nextLine());
         this.updateHostels();
-    }
-
-    public Hostel searchHostelByName(String id) {
-        // Search for hostel by name
-        for (Hostel hostel : hostels) {
-            if (hostel.getHostelId().equals(id)) {
-                return hostel;
-            }
-        }
-        return null;
     }
 
     public void displayHostels() {
@@ -209,21 +183,37 @@ public class HostelManager {
             System.out.println();
         }
     }
+    public boolean checkDuplicateStudentID(String studentID) {
+        for (Hostel hostel : hostels) {
+            if (!hostel.getStudents().isEmpty()) {
+                for (Student student : hostel.getStudents()) {
+                    if (student.getStudentID().equals(studentID)) {
+                        System.out.println("Student with similar ID already exists.\nTry Different ID");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-    // Methods to manage hostels, rooms, and students
-    public void addStudent(Student student, Hostel hostel) {
-        // Add student to hostel
+    public void addStudentToHostelFile(Student student, Hostel hostel) {
         try {
             FileWriter writer = new FileWriter(hostel.getName() + ".txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(student.toString());
             bufferedWriter.newLine();
             bufferedWriter.close();
-            System.out.println("Successfully wrote to the file.");
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    // Methods to manage hostels, rooms, and students
+    public void addStudent(Student student, Hostel hostel) {
+        // Add student to hostel
+        addStudentToHostelFile(student, hostel);
+        hostels.get(hostels.indexOf(hostel)).getStudents().add(student);
     }
 
     public void removeStudent(Student student, Hostel hostel) {
