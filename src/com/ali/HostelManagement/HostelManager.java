@@ -44,37 +44,6 @@ public class HostelManager {
         }
     }
 
-    public void updateHostels() {
-        // Update hostels
-        File hostelDirectory = new File("Hostel.txt");
-        FileWriter writer = null;
-        BufferedWriter bufferedWriter = null;
-        if (hostelDirectory.exists()) {
-            try {
-                writer = new FileWriter("Hostel.txt");
-                bufferedWriter = new BufferedWriter(writer);
-                for (Hostel hostel : hostels) {
-                    bufferedWriter.write(hostel.getHostelId() + "," + hostel.getName() + "," + hostel.getAddress());
-                    bufferedWriter.newLine();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                    }
-                    if (writer != null) {
-                        writer.close();
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    }
-
-
     public void addHostel(Hostel hostel) {
         // Add hostel
         for (Hostel h : hostels) {
@@ -165,15 +134,6 @@ public class HostelManager {
         }
         return null;
     }
-
-    public void editHostelDetails(Hostel hostel) {
-        // Edit hostel details
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter new address: ");
-        hostel.setAddress(input.nextLine());
-        this.updateHostels();
-    }
-
     public void displayHostels() {
         // Display all hostels
         for (Hostel hostel : hostels) {
@@ -210,6 +170,7 @@ public class HostelManager {
             throw new RuntimeException(e);
         }
     }
+
     // Methods to manage hostels, rooms, and students
     public void addStudent(Student student, Hostel hostel) {
         // Add student to hostel
@@ -260,6 +221,7 @@ public class HostelManager {
         }
 
     }
+
     public Hostel searchHostelByStudentID(String studentID) {
         // Search for hostel by student ID
         for (Hostel hostel : hostels) {
@@ -271,6 +233,7 @@ public class HostelManager {
         }
         return null;
     }
+
     public Student searchStudent(String studentID) {
         // Search for student in hostel
         for (Hostel hostel : hostels) {
@@ -285,30 +248,17 @@ public class HostelManager {
 
     public void displayStudents(Hostel hostel) {
         // Display all students in hostel
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(hostel.getName() + ".txt");
-            Scanner scanner = new Scanner(fileReader);
-            System.out.println("Hostel: " + hostel.getName());
-            while (scanner.hasNextLine()) {
-                String[] student = scanner.nextLine().split(",");
-                System.out.println("Student ID: " + student[0]);
-                System.out.println("Name: " + student[1]);
-                System.out.println("Age: " + student[2]);
-                System.out.println("Gender: " + student[3]);
-                System.out.println("Phone number: " + student[4]);
-                System.out.println("Room number: " + student[5]);
-                System.out.println();
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (fileReader != null) {
-                    fileReader.close();
+        for (Hostel h : hostels) {
+            if (h.getHostelId().equals(hostel.getHostelId())) {
+                for (Student student : h.getStudents()) {
+                    System.out.println("Student ID: " + student.getStudentID());
+                    System.out.println("Name: " + student.getName());
+                    System.out.println("Age: " + student.getAge());
+                    System.out.println("Gender: " + student.getGender());
+                    System.out.println("Phone number: " + student.getContactNumber());
+                    System.out.println("Room number: " + student.getRoomNumber());
+                    System.out.println();
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         }
     }

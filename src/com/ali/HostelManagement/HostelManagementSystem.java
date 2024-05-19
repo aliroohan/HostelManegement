@@ -54,13 +54,6 @@ public class HostelManagementSystem {
                     // Display all hostels
                     manager.displayHostels();
                     break;
-                case 4:
-                    // Edit hostel details
-                    // You need to ask for the hostelId and new details here
-                    System.out.print("Enter hostel ID: ");
-                    String hostelID = scanner.nextLine();
-                    manager.editHostelDetails(manager.searchHostel(hostelID));
-                    break;
                 case 5:
                     // Add a student
                     // You need to ask for the student details here
