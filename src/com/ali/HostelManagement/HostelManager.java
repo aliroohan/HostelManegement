@@ -69,6 +69,8 @@ public class HostelManager {
                 System.out.println("File created: " + file.getName());
             } else {
                 System.out.println("File already exists.");
+                FileWriter writer = new FileWriter(hostel.getName() + ".txt", false);
+                BufferedWriter bufferedWriter = new BufferedWriter(writer);
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -134,6 +136,7 @@ public class HostelManager {
         }
         return null;
     }
+
     public void displayHostels() {
         // Display all hostels
         for (Hostel hostel : hostels) {
@@ -266,103 +269,26 @@ public class HostelManager {
     public void displayAllStudents() {
         // Display all students in all hostels
         for (Hostel hostel : hostels) {
-            FileReader fileReader = null;
-            try {
-                System.out.println("Hostel: " + hostel.getName());
+            System.out.println("Hostel ID: " + hostel.getName());
+            if(hostel.getStudents().isEmpty()){
+                System.out.println("No students in this hostel.");
+            }
+            System.out.println();
+            for (Student student : hostel.getStudents()) {
+                System.out.println("Student ID: " + student.getStudentID());
+                System.out.println("Name: " + student.getName());
+                System.out.println("Age: " + student.getAge());
+                System.out.println("Gender: " + student.getGender());
+                System.out.println("Phone number: " + student.getContactNumber());
+                System.out.println("Room number: " + student.getRoomNumber());
                 System.out.println();
-                fileReader = new FileReader(hostel.getName() + ".txt");
-                Scanner scanner = new Scanner(fileReader);
-                while (scanner.hasNextLine()) {
-                    String[] student = scanner.nextLine().split(",");
-                    System.out.println("Student ID: " + student[0]);
-                    System.out.println("Name: " + student[1]);
-                    System.out.println("Age: " + student[2]);
-                    System.out.println("Gender: " + student[3]);
-                    System.out.println("Phone number: " + student[4]);
-                    System.out.println("Room number: " + student[5]);
-                    System.out.println();
-                }
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (fileReader != null) {
-                        fileReader.close();
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
         }
     }
 
     public void editDetails(Student student, Hostel hostel) {
         // Edit student details
-        FileReader fileReader = null;
-        File tempFile = new File("temp.txt");
-        File hostelFile = new File(hostel.getName() + ".txt");
-        try {
-            tempFile.createNewFile();
-            fileReader = new FileReader(hostel.getName() + ".txt");
-            Scanner scanner = new Scanner(fileReader);
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
-            boolean studentFound = false;
-            while (scanner.hasNextLine()) {
-                String[] studentInfo = scanner.nextLine().split(",");
-                if (studentInfo[0].equals(student.getStudentID())) {
-                    Student updatedStudent = new Student(student.getStudentID(), student.getName(), student.getAge(), student.getGender(), student.getContactNumber(), student.getRoomNumber());
-                    System.out.println("What do you want to update?");
-                    System.out.println("1. Age");
-                    System.out.println("2. Phone number");
-                    System.out.println("3. Room number");
-                    Scanner input = new Scanner(System.in);
-                    int choice = input.nextInt();
-                    switch (choice) {
-                        case 1:
-                            System.out.println("Enter new age: ");
-                            updatedStudent.setAge(input.nextInt());
-                            break;
-                        case 2:
-                            System.out.println("Enter new phone number: ");
-                            updatedStudent.setContactNumber(input.nextLine());
-                            break;
-                        case 3:
-                            System.out.println("Enter new room number: ");
-                            updatedStudent.setRoomNumber(input.nextInt());
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
 
-                    bufferedWriter.write(updatedStudent.toString());
-                    bufferedWriter.newLine();
-                    studentFound = true;
-                } else {
-                    bufferedWriter.write(studentInfo[0] + "," + studentInfo[1] + "," + studentInfo[2] + "," + studentInfo[3] + "," + studentInfo[4] + "," + studentInfo[5]);
-                    bufferedWriter.newLine();
-                }
-            }
-            if (!studentFound) {
-                System.out.println("Student not found.");
-            }
-            bufferedWriter.close();
-            fileReader.close();
-            hostelFile.delete();
-            if (!tempFile.renameTo(new File(hostel.getName() + ".txt"))) {
-                throw new RuntimeException("Could not rename file");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (fileReader != null) {
-                    fileReader.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
 
