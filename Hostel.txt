@@ -1,3 +1,2 @@
 2,GM,Lahore
-1,ehsan,pakpatan
 3,sukh,lahore

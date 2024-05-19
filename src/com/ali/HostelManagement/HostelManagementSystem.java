@@ -92,8 +92,20 @@ public class HostelManagementSystem {
                     manager.addStudent(new Student(studentID, studentName, studentAge, studentGender, studentContactNumber, studentRoomNumber), manager.searchHostel(id));
                     break;
                 case 6:
-                    // Search for a hostel
-                    // You need to ask for the hostelId here
+                    // Remove a student
+                    // You need to ask for the studentId here
+                    System.out.print("Enter student ID: ");
+                    String studentID1 = scanner.nextLine();
+                    Student student;
+                    student = manager.searchStudent(studentID1);
+                    if (student == null) {
+                        System.out.println("Student not found.");
+                        break;
+                    } else {
+                        Hostel hostel2 = manager.searchHostelByStudentID(studentID1);
+                        manager.removeStudent(student, hostel2);
+                        System.out.println("Student removed.");
+                    }
                     break;
                 case 7:
                     // Edit hostel details
