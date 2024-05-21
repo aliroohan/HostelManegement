@@ -288,7 +288,37 @@ public class HostelManager {
 
     public void editDetails(Student student, Hostel hostel) {
         // Edit student details
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What do you want to edit?");
+        System.out.println("1. Age");
+        System.out.println("2. Phone number");
+        System.out.println("3. Room number");
+        System.out.println("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1:
+                System.out.print("Enter new age: ");
+                int age = scanner.nextInt();
+                scanner.nextLine();
+                student.setAge(age);
+                break;
+            case 2:
+                System.out.print("Enter new phone number: ");
+                String phoneNumber = scanner.nextLine();
+                student.setContactNumber(phoneNumber);
+                break;
+            case 3:
+                System.out.print("Enter new room number: ");
+                int roomNumber = scanner.nextInt();
+                scanner.nextLine();
+                student.setRoomNumber(roomNumber);
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
+        removeStudent(student, hostel);
+        addStudent(student, hostel);
     }
 
 
