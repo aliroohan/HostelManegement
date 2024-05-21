@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class HostelManager {
-    private ArrayList<Hostel> hostels = new ArrayList<>();
+    private final ArrayList<Hostel> hostels = new ArrayList<>();
 
     public ArrayList<Hostel> getHostels() {
         return hostels;
@@ -103,7 +103,7 @@ public class HostelManager {
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(tempHostels.getFirst().getHostelId() + "," + tempHostels.getFirst().getName() + "," + tempHostels.getFirst().getAddress());
             bufferedWriter.newLine();
-            tempHostels.remove(0);
+            tempHostels.removeFirst();
             bufferedWriter.close();
             writer.close();
             writer = new FileWriter("Hostel.txt", true);
