@@ -1,6 +1,4 @@
-2,GM,Lahore
 3,sukh,lahore
-1,ehsan,lahore
 5,kasjd,lahore
 9,jshfksfdk,lahore
 4,ali,lahore
