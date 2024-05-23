@@ -44,12 +44,12 @@ public class HostelManager {
         }
     }
 
-    public void addHostel(Hostel hostel) {
+    public boolean addHostel(Hostel hostel) {
         // Add hostel
         for (Hostel h : hostels) {
             if (h.getHostelId().equals(hostel.getHostelId())) {
                 System.out.println("Hostel with similar ID already exists.\nTry Different ID");
-                return;
+                return false;
             }
         }
         hostels.add(hostel);
@@ -76,6 +76,7 @@ public class HostelManager {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return true;
     }
 
     public void removeHostel(Hostel hostel) {
