@@ -48,7 +48,7 @@ public class Home extends JFrame implements ActionListener{
 
         removeStudent = new JButton("Remove Student");
         removeStudent.setBounds(50, 280, 150, 40);
-//        remove.addActionListener(this);
+        removeStudent.addActionListener(this);
         image.add(removeStudent);
 
         editStudent = new JButton("Edit Student");
@@ -86,6 +86,9 @@ public class Home extends JFrame implements ActionListener{
         } else if (ae.getSource() == addStudent){
             setVisible(false);
             new AddStudent().setVisible(true);
+        } else if (ae.getSource() == removeStudent){
+            setVisible(false);
+            new RemoveStudent().setVisible(true);
         }
     }
 
