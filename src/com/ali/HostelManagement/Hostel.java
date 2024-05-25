@@ -9,6 +9,7 @@ public class Hostel {
     private String address;
     private ArrayList<Student> students;
 
+
     public String getHostelId() {
         return hostelId;
     }
@@ -40,7 +41,6 @@ public class Hostel {
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
-
     public Hostel(String hostelId, String name, String address) {
         setHostelId(hostelId);
         setName(name);

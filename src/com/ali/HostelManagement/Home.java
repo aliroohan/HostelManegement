@@ -4,45 +4,69 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Home extends JFrame{
+public class Home extends JFrame implements ActionListener{
 
-    JButton view, add, update, remove;
+    JButton addHostel, removeHostel, displayHostel, addStudent, removeStudent, editStudent, searchStudent, displayStudent;
 
     Home() {
 
         setLayout(null);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/home.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/home background.PNG"));
         Image i2 = i1.getImage().getScaledInstance(1120, 630, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
         image.setBounds(0, 0, 1120, 630);
         add(image);
 
-        JLabel heading = new JLabel("Employee Management System");
+        JLabel heading = new JLabel("Hostel Management System");
         heading.setBounds(620, 20, 400, 40);
         heading.setFont(new Font("Raleway", Font.BOLD, 25));
         image.add(heading);
 
-        add = new JButton("Add Hostel");
-        add.setBounds(650, 80, 150, 40);
-//        add.addActionListener(this);
-        image.add(add);
+        addHostel = new JButton("Add Hostel");
+        addHostel.setBounds(50, 80, 150, 40);
+        addHostel.addActionListener(this);
+        image.add(addHostel);
 
-        view = new JButton("Remove Hostel");
-        view.setBounds(820, 80, 150, 40);
-//        view.addActionListener(this);
-        image.add(view);
 
-        update = new JButton("Display Hostels");
-        update.setBounds(650, 140, 150, 40);
-//        update.addActionListener(this);
-        image.add(update);
+        removeHostel = new JButton("Remove Hostel");
+        removeHostel.setBounds(50, 130, 150, 40);
+        removeHostel.addActionListener(this);
+        image.add(removeHostel);
 
-        remove = new JButton("Remove Employee");
-        remove.setBounds(820, 140, 150, 40);
+
+        displayHostel = new JButton("Display Hostels");
+        displayHostel.setBounds(50, 180, 150, 40);
+        displayHostel.addActionListener(this);
+        image.add(displayHostel);
+
+        addStudent = new JButton("Add Student");
+        addStudent.setBounds(50, 230, 150, 40);
+        addStudent.addActionListener(this);
+        image.add(addStudent);
+
+        removeStudent = new JButton("Remove Student");
+        removeStudent.setBounds(50, 280, 150, 40);
 //        remove.addActionListener(this);
-        image.add(remove);
+        image.add(removeStudent);
+
+        editStudent = new JButton("Edit Student");
+        editStudent.setBounds(50, 330, 150, 40);
+//        remove.addActionListener(this);
+        image.add(editStudent);
+
+        searchStudent = new JButton("Search Student");
+        searchStudent.setBounds(50, 380, 150, 40);
+//        remove.addActionListener(this);
+        image.add(searchStudent);
+
+        displayStudent = new JButton("Display Students");
+        displayStudent.setBounds(50, 430, 150, 40);
+//        remove.addActionListener(this);
+        image.add(displayStudent);
+
+
 
         setSize(1120, 630);
         setLocation(250, 100);
@@ -50,19 +74,19 @@ public class Home extends JFrame{
     }
 
     public void actionPerformed(ActionEvent ae) {
-//        if (ae.getSource() == add) {
-//            setVisible(false);
-//            new AddEmployee();
-//        } else if (ae.getSource() == view) {
-//            setVisible(false);
-//            new ViewEmployee();
-//        } else if (ae.getSource() == update) {
-//            setVisible(false);
-//            new ViewEmployee();
-//        } else {
-//            setVisible(false);
-//            new RemoveEmployee();
-//        }
+        if (ae.getSource() == addHostel) {
+            setVisible(false);
+            new AddHostel().setVisible(true);
+        } else if (ae.getSource() == removeHostel) {
+            setVisible(false);
+            new RemoveHostel().setVisible(true);
+        } else if (ae.getSource() == displayHostel) {
+            setVisible(false);
+            new DisplayHostels().setVisible(true);
+        } else if (ae.getSource() == addStudent){
+            setVisible(false);
+            new AddStudent().setVisible(true);
+        }
     }
 
     public static void main(String[] args) {
