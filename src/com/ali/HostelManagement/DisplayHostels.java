@@ -3,7 +3,7 @@ package com.ali.HostelManagement;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class DisplayHostels extends JFrame {
+public class DisplayHostels extends JFrame{
     JTable table;
     JLabel title;
 

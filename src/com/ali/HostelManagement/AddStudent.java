@@ -2,7 +2,7 @@ package com.ali.HostelManagement;
 
 import javax.swing.*;
 
-public class AddStudent extends JFrame {
+public class AddStudent extends JFrame{
     JButton AddStudent;
     JTextField studentId;
     JTextField studentName;
