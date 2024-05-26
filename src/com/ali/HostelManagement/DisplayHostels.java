@@ -13,6 +13,7 @@ public class DisplayHostels extends JFrame {
 
     public DisplayHostels(){
         setBounds(600, 200, 850, 570);
+        setTitle("Hostels");
         setLayout(null);
         setLocationRelativeTo(null);
 

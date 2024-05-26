@@ -322,5 +322,10 @@ public class HostelManager {
         addStudent(student, hostel);
     }
 
+    public void editStudentbyGUI(Student student, Hostel hostel){
+        removeStudent(student, hostel);
+        addStudent(student, hostel);
+    }
+
 
 }

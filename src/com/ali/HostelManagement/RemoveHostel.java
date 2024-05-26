@@ -13,6 +13,7 @@ public class RemoveHostel extends JFrame implements ActionListener {
 
     public RemoveHostel() {
         setBounds(600, 200, 850, 570);
+        setTitle("Remove Hostel");
         setLayout(null);
 
         JLabel l1 = new JLabel("Hostel Id");

@@ -11,6 +11,7 @@ public class Home extends JFrame implements ActionListener{
     Home() {
 
         setLayout(null);
+        setTitle("Home");
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/home background.PNG"));
         Image i2 = i1.getImage().getScaledInstance(1120, 630, Image.SCALE_DEFAULT);
@@ -51,19 +52,14 @@ public class Home extends JFrame implements ActionListener{
         removeStudent.addActionListener(this);
         image.add(removeStudent);
 
-        editStudent = new JButton("Edit Student");
-        editStudent.setBounds(50, 330, 150, 40);
-//        remove.addActionListener(this);
-        image.add(editStudent);
-
         searchStudent = new JButton("Search Student");
-        searchStudent.setBounds(50, 380, 150, 40);
-//        remove.addActionListener(this);
+        searchStudent.setBounds(50, 330, 150, 40);
+        searchStudent.addActionListener(this);
         image.add(searchStudent);
 
         displayStudent = new JButton("Display Students");
-        displayStudent.setBounds(50, 430, 150, 40);
-//        remove.addActionListener(this);
+        displayStudent.setBounds(50, 380, 150, 40);
+        displayStudent.addActionListener(this);
         image.add(displayStudent);
 
 

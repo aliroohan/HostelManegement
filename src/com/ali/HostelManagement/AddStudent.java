@@ -22,6 +22,7 @@ public class AddStudent extends JFrame {
     public AddStudent() {
         setBounds(600, 200, 400, 600);
         setLayout(null);
+        setTitle("Add Student");
 
         JLabel title = new JLabel("Add Student");
         title.setBounds(100, 10, 200, 30);
@@ -95,7 +96,7 @@ public class AddStudent extends JFrame {
             new AddStudent().setVisible(true);
             hostelManager = new HostelManager();
             hostel = hostelManager.searchHostel(hostelId.getText());
-            Student student = new Student(studentId.getText(), studentName.getText(), Integer.parseInt(age.getText()), gender.getActionCommand(), contact.getText(), Integer.parseInt(roomNumber.getText()));
+            Student student = new Student(studentId.getText(), studentName.getText(), Integer.parseInt(age.getText()), (String) gender.getSelectedItem(), contact.getText(), Integer.parseInt(roomNumber.getText()));
 
 
             if (hostel == null) {
