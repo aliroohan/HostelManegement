@@ -6,6 +6,8 @@ import java.util.ArrayList;
 public class DisplayAllStudents extends JFrame {
     JTable table;
     JLabel title;
+    JButton home;
+
 
     public static void main(String[] args) {
         new DisplayAllStudents().setVisible(true);
@@ -14,11 +16,14 @@ public class DisplayAllStudents extends JFrame {
     public DisplayAllStudents() {
         setBounds(600, 200, 850, 570);
         setTitle("Students");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(null);
         setLocationRelativeTo(null);
 
         title = new JLabel("Students");
-        title.setBounds(400, 10, 100, 30);
+        title.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+        title.setBounds(375, 10, 100, 30);
         add(title);
 
         String[] columnsNames = {"Student Id", "Name", "Age", "Gender", "Contact", "Room Number", "Hostel Id" };
@@ -44,5 +49,13 @@ public class DisplayAllStudents extends JFrame {
         JScrollPane pane = new JScrollPane(table);
         pane.setBounds(0, 70, 850, 500);
         add(pane);
+
+        home = new JButton("Go to Home");
+        home.setBounds(700, 20, 120, 30);
+        add(home);
+        home.addActionListener(e -> {
+            new Home().setVisible(true);
+            setVisible(false);
+        });
     }
 }

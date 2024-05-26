@@ -9,6 +9,7 @@ public class AddHostel extends JFrame implements ActionListener {
     JTextField hostelId;
     JTextField hostelName;
     JTextField hostelAddress;
+    JButton homeButton;
 
     public static void main(String[] args) {
         new AddHostel().setVisible(true);
@@ -16,6 +17,8 @@ public class AddHostel extends JFrame implements ActionListener {
 
     public AddHostel() {
         setBounds(600, 200, 850, 570);
+        setTitle("Add Hostel");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
         JLabel l1 = new JLabel("Hostel Id");
@@ -49,9 +52,14 @@ public class AddHostel extends JFrame implements ActionListener {
         b.setForeground(UIManager.getColor("Button.disabledForeground"));
 
 
-        b.setBounds(50, 210, 100, 30);
+        b.setBounds(50, 210, 120, 30);
         add(b);
         b.addActionListener(this);
+
+        homeButton = new JButton("Go to Home");
+        homeButton.setBounds(50, 250, 120, 30);
+        add(homeButton);
+        homeButton.addActionListener(this);
     }
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == b){
@@ -66,6 +74,10 @@ public class AddHostel extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Hostel added successfully");
             }
 
+        }
+        if (ae.getSource() == homeButton){
+            this.setVisible(false);
+            new Home().setVisible(true);
         }
     }
 }

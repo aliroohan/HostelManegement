@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class RemoveStudent extends JFrame implements ActionListener {
     JTextField studentId;
     JButton removeStudent;
+    JButton home;
 
     public static void main(String[] args) {
         new RemoveStudent().setVisible(true);
@@ -14,6 +15,7 @@ public class RemoveStudent extends JFrame implements ActionListener {
 
     public RemoveStudent() {
         setBounds(600, 200, 850, 570);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
         JLabel l1 = new JLabel("Student ID");
@@ -28,9 +30,14 @@ public class RemoveStudent extends JFrame implements ActionListener {
         removeStudent.setBackground(UIManager.getColor("Button.disabledShadow"));
         removeStudent.setForeground(UIManager.getColor("Button.disabledForeground"));
 
-        removeStudent.setBounds(50, 210, 150, 30);
+        removeStudent.setBounds(50, 210, 130, 30);
         add(removeStudent);
         removeStudent.addActionListener(this);
+
+        home = new JButton("Go to Home");
+        home.setBounds(200, 210, 120, 30);
+        add(home);
+        home.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -46,6 +53,10 @@ public class RemoveStudent extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Student not found");
             }
+        }
+        else if (ae.getSource() == home){
+            this.setVisible(false);
+            new Home().setVisible(true);
         }
     }
 }

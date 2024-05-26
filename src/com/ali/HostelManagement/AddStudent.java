@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class AddStudent extends JFrame{
     JButton AddStudent;
+    JButton Home;
     JTextField studentId;
     JTextField studentName;
     JTextField age;
@@ -15,6 +16,7 @@ public class AddStudent extends JFrame{
     HostelManager hostelManager;
 
 
+
     public static void main(String[] args) {
         new AddStudent().setVisible(true);
     }
@@ -22,6 +24,7 @@ public class AddStudent extends JFrame{
     public AddStudent() {
         setBounds(600, 200, 400, 600);
         setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Add Student");
 
         JLabel title = new JLabel("Add Student");
@@ -109,6 +112,14 @@ public class AddStudent extends JFrame{
             }
             hostelManager.addStudent(student, hostel);
             JOptionPane.showMessageDialog(null, "Student added successfully");
+        });
+
+        Home = new JButton("Go to Home");
+        Home.setBounds(200, 410, 120, 30);
+        add(Home);
+        Home.addActionListener(e -> {
+            this.setVisible(false);
+            new Home().setVisible(true);
         });
     }
 

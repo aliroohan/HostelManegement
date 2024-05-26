@@ -12,6 +12,7 @@ public class Home extends JFrame implements ActionListener{
 
         setLayout(null);
         setTitle("Home");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/home background.PNG"));
         Image i2 = i1.getImage().getScaledInstance(1120, 630, Image.SCALE_DEFAULT);

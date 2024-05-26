@@ -17,6 +17,7 @@ public class DisplayStudentsOfHostel extends JFrame {
     public DisplayStudentsOfHostel() {
         setBounds(600, 200, 850, 570);
         setTitle("Students");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
 
@@ -33,11 +34,19 @@ public class DisplayStudentsOfHostel extends JFrame {
         add(hostelIdField);
 
         search = new JButton("Search");
-        search.setBounds(50, 100, 100, 30);
+        search.setBounds(50, 100, 120, 30);
         add(search);
 
         search.addActionListener(e -> {
             displayStudents();
+        });
+
+        JButton home = new JButton("Go to Home");
+        home.setBounds(200, 100, 120, 30);
+        add(home);
+        home.addActionListener(e -> {
+            new Home().setVisible(true);
+            setVisible(false);
         });
     }
 
