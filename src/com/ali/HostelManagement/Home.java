@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class Home extends JFrame implements ActionListener{
 
-    JButton addHostel, removeHostel, displayHostel, addStudent, removeStudent, editStudent, searchStudent, displayStudent;
+    JButton addHostel, removeHostel, displayHostel, addStudent, removeStudent, searchStudent, displayStudent, displayStudentsOfHostel;
 
     Home() {
 
@@ -63,6 +63,11 @@ public class Home extends JFrame implements ActionListener{
         displayStudent.addActionListener(this);
         image.add(displayStudent);
 
+        displayStudentsOfHostel = new JButton("Students of Hostel");
+        displayStudentsOfHostel.setBounds(50, 430, 150, 40);
+        displayStudentsOfHostel.addActionListener(this);
+        image.add(displayStudentsOfHostel);
+
 
 
         setSize(1120, 630);
@@ -86,6 +91,15 @@ public class Home extends JFrame implements ActionListener{
         } else if (ae.getSource() == removeStudent){
             setVisible(false);
             new RemoveStudent().setVisible(true);
+        } else if (ae.getSource() == searchStudent){
+            setVisible(false);
+            new SearchStudent().setVisible(true);
+        } else if (ae.getSource() == displayStudent){
+            setVisible(false);
+            new DisplayAllStudents().setVisible(true);
+        } else if (ae.getSource() == displayStudentsOfHostel){
+            setVisible(false);
+            new DisplayStudentsOfHostel().setVisible(true);
         }
     }
 

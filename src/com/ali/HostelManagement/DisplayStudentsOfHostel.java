@@ -53,7 +53,12 @@ public class DisplayStudentsOfHostel extends JFrame {
     public void displayStudents() {
         String[] columnsNames = {"Student Id", "Name", "Age", "Gender", "Contact", "Room Number", "Hostel Id" };
         HostelManager hostelManager = new HostelManager();
-        ArrayList<Student> students = hostelManager.searchHostelByStudentID(hostelIdField.getText()).getStudents();
+        Hostel hostel = hostelManager.searchHostel(hostelIdField.getText());
+        if (hostel == null) {
+            JOptionPane.showMessageDialog(null, "Hostel not found");
+            return;
+        }
+        ArrayList<Student> students = hostel.getStudents();
         Student[] s = new Student[students.size()];
         String[][] data = new String[s.length][7];
         for (int i = 0; i < s.length; i++) {
