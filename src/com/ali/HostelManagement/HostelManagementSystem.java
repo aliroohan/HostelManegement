@@ -16,9 +16,8 @@ public class HostelManagementSystem {
             System.out.println("5. Add a student");
             System.out.println("6. Remove a student");
             System.out.println("7. Search for a student");
-            System.out.println("8. Edit student details");
-            System.out.println("9. Display all students of a hostel");
-            System.out.println("10. Exit");
+            System.out.println("8. Display all students of a hostel");
+            System.out.println("9. Exit");
 
             int option = scanner.nextInt();
             scanner.nextLine();  // Consume newline left-over
@@ -123,21 +122,6 @@ public class HostelManagementSystem {
                     }
                     break;
                 case 8:
-                    // Edit student details
-                    // You need to ask for the studentId and new details here
-                    System.out.print("Enter student ID: ");
-                    String studentID3 = scanner.nextLine();
-                    Student student2;
-                    student2 = manager.searchStudent(studentID3);
-                    if (student2 == null) {
-                        System.out.println("Student not found.");
-                        break;
-                    } else {
-                        Hostel hostel2 = manager.searchHostelByStudentID(studentID3);
-                        manager.editDetails(student2, hostel2);
-                    }
-                    break;
-                case 9:
                     // Display all students of a hostel
                     // You need to ask for the hostelId here
                     System.out.println("Enter hostel ID: ");
@@ -149,7 +133,7 @@ public class HostelManagementSystem {
                     }
                     manager.displayStudents(manager.searchHostel(hostelID1));
                     break;
-                case 10:
+                case 9:
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;
